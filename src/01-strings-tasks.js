@@ -199,6 +199,8 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(/* width, height */) {
+  /*   const verticalLine = '│';
+  const horizontalLine = '─'; */
   throw new Error('Not implemented');
 }
 
@@ -218,8 +220,47 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const basicSymbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const rot13Symbols = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  const symbolIndexArray = [];
+  const relustArray = [];
+  let reslutString = '';
+
+  Array.from(str).forEach((symbolStr) => {
+    if (symbolStr === ' ') {
+      symbolIndexArray.push(' ');
+    }
+
+    if (symbolStr === '?') {
+      symbolIndexArray.push('?');
+    }
+    if (symbolStr === '!') {
+      symbolIndexArray.push('!');
+    }
+    Array.from(basicSymbols).forEach((basicSymbol, basicSymbolIndex) => {
+      if (symbolStr === basicSymbol) {
+        symbolIndexArray.push(basicSymbolIndex);
+      }
+    });
+  });
+
+  symbolIndexArray.forEach((elemNumber) => {
+    if (elemNumber === '?') {
+      relustArray.push('?');
+    }
+    if (elemNumber === ' ') {
+      relustArray.push(' ');
+    }
+    if (elemNumber === '!') {
+      relustArray.push('!');
+    }
+    relustArray.push(rot13Symbols[elemNumber]);
+  });
+  reslutString = relustArray.join('');
+
+  return reslutString;
+  /* throw new Error('Not implemented'); */
 }
 
 /**
